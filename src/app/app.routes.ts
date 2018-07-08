@@ -1,22 +1,19 @@
-import { HomeComponent } from './home/home.component';
-import { Routes } from "@angular/router";
+import {Routes} from '@angular/router';
+
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 export const APP_ROUTES: Routes = [
-    {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'flight-booking',
-        loadChildren: './flight-booking/flight-booking.module#FlightBookingModule'
-    },
-    {
-        path: '**',
-        redirectTo: 'home'
-    }
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: DashboardComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'home'
+  }
 ];
