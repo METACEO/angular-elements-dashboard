@@ -4,11 +4,13 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {BrowserModule} from '@angular/platform-browser';
 
+import {ClientModule} from 'client';
 import {ExternalDashboardTileComponent} from './external-dashboard-tile/external-dashboard-tile.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    ClientModule,
     MatCardModule,
     MatTableModule,
   ],

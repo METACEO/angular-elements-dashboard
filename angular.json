@@ -11,7 +11,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "lazyModules": [],
-            "outputPath": "dist",
+            "outputPath": "dist/dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -247,6 +247,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "projects/external-dashboard-tile-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "client": {
+      "root": "projects/client",
+      "sourceRoot": "projects/client/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/client/tsconfig.lib.json",
+            "project": "projects/client/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/client/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/client/src/test.ts",
+            "tsConfig": "projects/client/tsconfig.spec.json",
+            "karmaConfig": "projects/client/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/client/tsconfig.lib.json",
+              "projects/client/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

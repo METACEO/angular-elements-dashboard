@@ -8,4 +8,14 @@
 
 </mat-toolbar>
 
-<div id="content"></div>
+<gridster [options]="options">
+  <gridster-item *ngFor="let element of elements"
+                 [item]="makeItem(element)"
+                 class="mat-elevation-z2">
+    <!--<span class="drag-handler">drag</span>-->
+    <app-dashboard-element
+      [type]="element.type"
+      [attributes]="element.attributes"
+    ></app-dashboard-element>
+  </gridster-item>
+</gridster>

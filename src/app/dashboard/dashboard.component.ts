@@ -1,5 +1,8 @@
-import {Component} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {GridsterConfig} from 'angular-gridster2';
 
+import {IElementInterface} from './IElement.interface';
 import {ExternalDashboardTileService} from './external-dashboard-tile.service';
 
 @Component({
@@ -7,9 +10,32 @@ import {ExternalDashboardTileService} from './external-dashboard-tile.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy, OnInit {
 
-  constructor(private externalService: ExternalDashboardTileService) {
+  elements: IElementInterface[] = [];
+  options: GridsterConfig = {};
+
+  constructor(@Inject(DOCUMENT) private document: HTMLDocument,
+              private externalService: ExternalDashboardTileService,
+              private renderer: Renderer2) {
+    this.options = {
+      itemChangeCallback: (item) => console.log('itemChangeCallback', item),
+      minCols: 12,
+      maxCols: 12,
+      minRows: 4,
+      draggable: {
+        enabled: true,
+        ignoreContent: true,
+      },
+      displayGrid: 'onDrag&Resize',
+      gridType: 'scrollVertical',
+      fixedColWidth: 80,
+      fixedRowHeight: 80,
+      pushItems: true,
+      resizable: {
+        enabled: false,
+      },
+    };
   }
 
   getData(): [number, number, number] {
@@ -18,6 +44,14 @@ export class DashboardComponent {
       Math.round(Math.random() * 100),
       Math.round(Math.random() * 100)
     ];
+  }
+
+  ngOnDestroy() {
+    this.renderer.removeClass(this.document.body, 'is-dashboard');
+  }
+
+  ngOnInit() {
+    this.renderer.addClass(this.document.body, 'is-dashboard');
   }
 
   addExternal(): void {
@@ -29,15 +63,32 @@ export class DashboardComponent {
 
     const data = this.getData();
 
-    const tile = document.createElement(tileKind);
-    tile.setAttribute('class', 'col-lg-4 col-md-3 col-sm-2');
-    tile.setAttribute('a', '' + data[0]);
-    tile.setAttribute('b', '' + data[1]);
-    tile.setAttribute('c', '' + data[2]);
+    this.elements.push({
+      attributes: {
+        a: data[0],
+        b: data[1],
+        c: data[2],
+      },
+      height: 4,
+      type: tileKind,
+      width: 4,
+      x: 0,
+      y: 0,
+    });
+    this.options.api.resize();
 
-    const content = document.getElementById('content');
-    content.appendChild(tile);
+  }
 
+  makeItem(element: IElementInterface) {
+    return {
+      cols: element.width,
+      rows: element.height,
+      y: element.y,
+      x: element.x,
+      minItemCols: element.width,
+      minItemRows: element.height,
+      id: element.id
+    };
   }
 
 }

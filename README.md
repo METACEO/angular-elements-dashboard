@@ -17,6 +17,8 @@ Build the external Custom Elements project before starting the main project:
 
 ```
 npm install
+npm run build:client
 npm run build:ce
-npm start
+npm run build
+npm run start:server
 ```

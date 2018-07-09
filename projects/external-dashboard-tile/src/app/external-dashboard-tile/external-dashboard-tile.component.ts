@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
 
+import {ClientService} from 'client';
+
 export interface ExampleData {
   key: string;
   value: number;
@@ -14,6 +16,10 @@ export class ExternalDashboardTileComponent implements AfterViewInit {
   @Input() a: number;
   @Input() b: number;
   @Input() c: number;
+
+  constructor(private clientService: ClientService) {
+    console.log(this.clientService);
+  }
 
   displayedColumns: string[] = ['key', 'value'];
   dataSource: ExampleData[] = [];

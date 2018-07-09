@@ -7,6 +7,6 @@ body, html {
   width: 100%;
 }
 
-body {
-  padding-top: 64px;
+body.is-dashboard {
+  overflow-y: hidden;
 }
