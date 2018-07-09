@@ -10,10 +10,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "lazyModules": [
-              "src/app/flight-cancelling/flight-cancelling.module",
-              "src/app/lazy-dashboard-tile/lazy-dashboard-tile.module"
-            ],
+            "lazyModules": [],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -144,7 +141,6 @@
       "schematics": {},
       "architect": {
         "build": {
-          // "builder": "@angular-devkit/build-angular:browser",
           "builder": "ngx-build-plus:build",
           "options": {
             "outputPath": "dist/external-dashboard-tile",
