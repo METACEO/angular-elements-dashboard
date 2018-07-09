@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ExternalDashboardTileService } from './external-dashboard-tile.service';
-import { LazyDashboardTileService } from './lazy-dashboard-tile.service';
+import {Component} from '@angular/core';
+
+import {ExternalDashboardTileService} from './external-dashboard-tile.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  constructor(
-    private lazyService: LazyDashboardTileService,
-    private externalService: ExternalDashboardTileService
-  ) { }
-
-  ngOnInit() {
+  constructor(private externalService: ExternalDashboardTileService) {
   }
 
   getData(): [number, number, number] {
@@ -23,16 +18,6 @@ export class DashboardComponent implements OnInit {
       Math.round(Math.random() * 100),
       Math.round(Math.random() * 100)
     ];
-  }
-
-  addDefault(): void {
-    this.add('dashboard-tile');
-  }
-  
-  addLazy(): void {
-    this.lazyService.load().then(_ => {
-      this.add('lazy-dashboard-tile');
-    });
   }
 
   addExternal(): void {

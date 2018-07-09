@@ -1,13 +1,11 @@
-<div>
+<mat-toolbar class="mat-typography">
 
-  <div id="actions">
-    <button class="btn btn-click" (click)="addDefault()">Add Default</button>
-    <button class="btn btn-click" (click)="addLazy()">Add Lazy</button>
-    <button class="btn btn-click" (click)="addExternal()">Add External</button>
-  </div>
+  <span>Dashboard</span>
 
-  <div class="row" id="content">
+  <span class="toolbar-spacer"></span>
 
-  </div>
+  <button mat-button (click)="addExternal()">Add External</button>
 
-</div>
+</mat-toolbar>
+
+<div id="content"></div>
